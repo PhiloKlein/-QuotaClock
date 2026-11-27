@@ -22,9 +22,21 @@
 ## 快速开始
 
 1. 从 Releases 的 **Assets** 下载 `QuotaClock.exe`，双击运行。
-2. 按「快速开始」引导安装并登录所需的 Codex CLI 或 Antigravity CLI，再点击「检测额度」。
-3. 用桌面卡片查看额度，或从 Windows 托盘进入设置，调整外观、自启和额度通知。
+2. 打开「设置 → 数据源」，选择 Codex、Gemini 或 Claude，按对应入口配置。
+3. 用「添加数据源」选配 DeepSeek 或连接兼容的 JSON 额度接口。Windows 托盘可以打开卡片外观、自启和通知设置。
 
-当前内置 Codex 和 Antigravity 额度卡片。自定义 API 可读取模型列表，其他服务的额度卡片需要接入对应的用量或限额数据源。额度按服务实际提供的账号、套餐或模型分组显示。Google AI Studio 可在设置中测试 API Key，并打开官方用量页面。
+## 数据源
+
+- **OpenAI Codex** 通过已登录的 Codex CLI 读取账号额度。
+- **Google Gemini** 通过 Antigravity 读取共享额度。Google AI Studio 项目的 API Key 可测试，并可打开官方用量页。
+- **Anthropic Claude** 通过 Claude Code 状态栏读取订阅额度快照。状态栏要先连接，并在 Claude Code 产生额度数据后更新。
+- **DeepSeek** 通过 API Key 查询账户余额，按 CNY 或 USD 显示。
+- **其他服务** 可提供只读 GET JSON 地址。支持 HTTPS 或本机 HTTP，可选 Bearer Key。每张卡最多显示两个窗口。
+
+自定义接口示例。每项也可用 `remaining` 和 `limit` 代替 `remaining_percent`，`resets_at` 接受 Unix 秒或 RFC 3339 时间。
+
+```json
+{"windows":[{"label":"每日","remaining_percent":72,"resets_at":"2026-12-01T08:00:00Z"}]}
+```
 
 [小红书](https://www.xiaohongshu.com/user/profile/5c0767606b58b7084fdc17f1) · [哔哩哔哩](https://space.bilibili.com/2552988) · [问题反馈](https://github.com/PhiloKlein/-QuotaClock/issues) · [第三方许可](./THIRD-PARTY-LICENSE.txt)

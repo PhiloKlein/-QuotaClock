@@ -22,9 +22,21 @@ Search for group **1135481515** in QQ to share feedback, report issues, or sugge
 ## Quick start
 
 1. Download and run `QuotaClock.exe` from the **Assets** section of a GitHub release.
-2. Follow the in-app setup guide to install and sign in to the Codex or Antigravity CLI, then check your quota.
-3. Check quota on the desktop cards or open Settings from the Windows system tray to adjust appearance, startup, and quota alerts.
+2. Open **Settings → Data sources** and choose Codex, Gemini, or Claude.
+3. Use **Add data source** for DeepSeek or a compatible JSON quota endpoint. Open Settings from the Windows tray to adjust appearance, startup, and alerts.
 
-Built-in quota cards cover Codex and Antigravity. Custom API connections can list models. Quota cards for other providers require a compatible usage or quota data source. Quotas follow the account, plan, or model groups reported by each provider. Google AI Studio settings let you test your API key and open the official usage page.
+## Data sources
+
+- **OpenAI Codex** reads account quotas through the signed-in Codex CLI.
+- **Google Gemini** reads Antigravity shared quotas. AI Studio settings can test a project API key and open the official usage page.
+- **Anthropic Claude** reads subscription snapshots from the Claude Code status line when Claude Code supplies quota data.
+- **DeepSeek** shows the API account balance in CNY or USD.
+- **Other services** can use a read-only JSON GET endpoint over HTTPS or loopback HTTP, with optional bearer authentication. A card supports up to two quota windows.
+
+For a custom endpoint, return a `windows` array. Each window can use `remaining_percent` or a `remaining` / `limit` pair, with an optional `resets_at` in Unix seconds or RFC 3339.
+
+```json
+{"windows":[{"label":"Daily","remaining_percent":72,"resets_at":"2026-12-01T08:00:00Z"}]}
+```
 
 [Xiaohongshu](https://www.xiaohongshu.com/user/profile/5c0767606b58b7084fdc17f1) · [Bilibili](https://space.bilibili.com/2552988) · [Report an issue](https://github.com/PhiloKlein/-QuotaClock/issues) · [Third-party licenses](./THIRD-PARTY-LICENSE.txt)
